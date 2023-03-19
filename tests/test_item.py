@@ -15,6 +15,14 @@ def test_item_init(example):
     assert example.quantity == 20
 
 
+def test_str(example):
+    assert str(example) == 'Смартфон'
+
+
+def test_repr(example):
+    assert repr(example) == "Item('Смартфон', 10000, 20)"
+
+
 def test_item_calculate_total_price(example):
     assert example.calculate_total_price() == 200000
 
@@ -25,8 +33,9 @@ def test_item_apply_discount(example):
     assert example.price == 8000.0
 
 
-def test_getname(example):
-    assert example.getname == 'Смартфон'
+def test_getname():
+    item1 = Item("Смартфон", 10000, 20)
+    assert item1.getname == 'Смартфон'
 
 
 def test_instantiate_from_csv():
