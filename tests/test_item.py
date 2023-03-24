@@ -1,7 +1,7 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
 import pytest
 from src.item import Item
-
+from src.phone import Phone
 
 @pytest.fixture
 def example():
@@ -44,3 +44,9 @@ def test_instantiate_from_csv():
 
 def test_string_to_number():
     assert Item.string_to_number('5.5') == 5
+
+
+def test_add():
+    item1 = Item("Смартфон", 10000, 20)
+    phone1 = Phone("iPhone 14", 120_000, 5, 2)
+    assert item1 + phone1 == 25

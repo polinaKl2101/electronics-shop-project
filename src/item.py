@@ -16,16 +16,16 @@ class Item:
         :param price: Цена за единицу товара.
         :param quantity: Количество товара в магазине.
         """
-        self.__name = name
+        self.name = name
         self.price = price
         self.quantity = quantity
         self.all.append(self)
 
     def __repr__(self):
-        return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
+        return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity})"
 
     def __str__(self):
-        return f"{self.__name}"
+        return f"{self.name}"
 
     def calculate_total_price(self) -> float:
         """
@@ -46,18 +46,18 @@ class Item:
 
         """функция для получения значения атрибута name"""
 
-        return self.__name
+        return self.name
 
     @getname.setter
     def getname(self, name):
 
         """функция для изменения/определения атрибута name"""
 
-        self.__name = name
-        if len(self.__name) >= 10:
+        self.name = name
+        if len(self.name) >= 10:
             print('Exception: Длина наименования товара превышает 10 символов.')
         else:
-            return self.__name
+            return self.name
 
     @classmethod
     def instantiate_from_csv(cls, csv_file='../src/items.csv'):
@@ -76,4 +76,10 @@ class Item:
         """функция, преобразующая строку в целое число"""
 
         return int(float(number))
+
+    def __add__(self, other):
+
+        if not isinstance(other, Item):
+            raise ValueError('Складывать можно только объекты Item и дочерние от них.')
+        return self.quantity + other.quantity
 
