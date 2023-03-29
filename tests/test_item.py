@@ -3,6 +3,7 @@ import pytest
 from src.item import Item
 from src.phone import Phone
 
+
 @pytest.fixture
 def example():
     item = Item("Смартфон", 10000, 20)
@@ -39,7 +40,7 @@ def test_getname():
 
 
 def test_instantiate_from_csv():
-    Item.instantiate_from_csv(csv_file='../src/items.csv')
+    Item.instantiate_from_csv(csv_file='./src/items.csv')
 
 
 def test_string_to_number():

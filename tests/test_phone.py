@@ -23,3 +23,4 @@ def test_str(example):
 def test_repr(example):
     assert repr(example) == "Phone('iPhone 14', 120000, 5, 2)"
 
+
