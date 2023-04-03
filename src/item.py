@@ -65,11 +65,20 @@ class Item:
 
         """класс метод для получения данных из файла сsv и формирования экземпляров"""
 
-        with open(csv_file, encoding='windows-1251') as file:
-            reader = csv.DictReader(file, delimiter=',')
-            for i in reader:
-                name, price, quantity = i.get('name'), int(i.get('price')), int(i.get('quantity'))
-                cls.all.append((name, price, quantity))
+        try:
+            with open(csv_file, encoding='windows-1251') as file:
+                reader = csv.DictReader(file, delimiter=',')
+                for i in reader:
+                    if any(i.get(value) is None for value in ['name', 'price', 'quantity']):
+                        raise InstantiateCSVError
+                    name, price, quantity = i.get('name'), int(i.get('price')), int(i.get('quantity'))
+                    cls.all.append((name, price, quantity))
+
+        except InstantiateCSVError as e:
+            print(e)
+        except FileNotFoundError:
+            print(" Отсутствует файл item.csv ")
+
 
     @staticmethod
     def string_to_number(number: str) -> int:
@@ -84,3 +93,9 @@ class Item:
             raise ValueError('Складывать можно только объекты Item и дочерние от них.')
         return self.quantity + other.quantity
 
+
+class InstantiateCSVError(Exception):
+
+    def __init__(self, text):
+
+        self.message = text

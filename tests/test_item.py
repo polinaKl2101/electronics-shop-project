@@ -51,3 +51,12 @@ def test_add():
     item1 = Item("Смартфон", 10000, 20)
     phone1 = Phone("iPhone 14", 120_000, 5, 2)
     assert item1 + phone1 == 25
+
+
+def test_get_from_cvs_normal():
+    Item.instantiate_from_csv(csv_file='./src/items.csv')
+
+
+def test_nonexistent_csv_file():
+    Item.instantiate_from_csv(csv_file='./src/nonexistent_file.csv')
+    assert 'Отсутствует файл item.csv'
